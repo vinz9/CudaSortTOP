@@ -2,6 +2,7 @@
 
 TouchDesigner TOP wrapper for Cuda Thrust sort_by_key function.
 Compatible with TouchDesigner 99 Spring 2019 Release and more recent.
+Windows binary provided on the releases page https://github.com/vinz9/CudaSortTOP/releases
 
 ## Usage
 
