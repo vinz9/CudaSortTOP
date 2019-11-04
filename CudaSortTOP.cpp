@@ -111,12 +111,16 @@ CudaSortTOP::getGeneralInfo(TOP_GeneralInfo* ginfo, const OP_Inputs *inputs, voi
 bool
 CudaSortTOP::getOutputFormat(TOP_OutputFormat* format, const OP_Inputs *inputs, void* reserved)
 {
-	// In this function we could assign variable values to 'format' to specify
-	// the pixel format/resolution etc that we want to output to.
-	// If we did that, we'd want to return true to tell the TOP to use the settings we've
-	// specified.
-	// In this example we'll return false and use the TOP's settings
-	return false;
+	
+	format->redChannel = true;
+	format->greenChannel = false;
+	format->blueChannel = false;
+	format->alphaChannel = false;
+
+	format->bitsPerChannel = 32;
+	format->floatPrecision = true;
+
+	return true;
 }
 
 void CudaSortTOP::initBuffers(int width, int height) {
