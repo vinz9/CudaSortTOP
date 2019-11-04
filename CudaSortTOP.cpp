@@ -16,7 +16,8 @@
 #include <string.h>
 #endif
 #include <cstdio>
-//#include "cuda_runtime.h"
+
+#include <iostream>
 
 
 // These functions are basic C function, which the DLL loader can find
@@ -112,7 +113,7 @@ bool
 CudaSortTOP::getOutputFormat(TOP_OutputFormat* format, const OP_Inputs *inputs, void* reserved)
 {
 	
-	format->redChannel = true;
+	/*format->redChannel = true;
 	format->greenChannel = false;
 	format->blueChannel = false;
 	format->alphaChannel = false;
@@ -120,7 +121,8 @@ CudaSortTOP::getOutputFormat(TOP_OutputFormat* format, const OP_Inputs *inputs, 
 	format->bitsPerChannel = 32;
 	format->floatPrecision = true;
 
-	return true;
+	return true;*/
+	return false;
 }
 
 void CudaSortTOP::initBuffers(int width, int height) {
@@ -179,6 +181,7 @@ CudaSortTOP::execute(TOP_OutputFormatSpecs* outputFormat ,
 {
 	myExecuteCount++;
 
+	myError = nullptr;
 
     int width = outputFormat->width;
     int height = outputFormat->height;
@@ -191,14 +194,17 @@ CudaSortTOP::execute(TOP_OutputFormatSpecs* outputFormat ,
 
 		//const GLint format = outputFormat->pixelFormat;
 
-		/*if (outputFormat->redBits != 32 ||
+		//std::cout << "format :" << format << std::endl;
+		//printf("format %d", format);
+
+		if (outputFormat->redBits != 32 ||
 			outputFormat->greenBits != 0 ||
 			outputFormat->blueBits != 0 ||
 			outputFormat->alphaBits != 0)
 		{
-			myError = "TOP format should be set to 32-bit float (Mono)";
+			myError = "TOP Pixel Format should be set to 32-bit float (Mono)";
 			return;
-		}*/
+		}
 
 		if (topInput->cudaInput == nullptr)
 		{
